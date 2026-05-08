@@ -43,31 +43,31 @@ const BRANDS = ["Semua", "Toyota", "Honda", "Suzuki", "Mitsubishi", "Daihatsu", 
 const TRANSMISSIONS = ["Semua", "Manual", "Automatic"]
 
 const condMap: Record<string, Record<string, string>> = {
-  "Sangat Baik": { id: "Sangat Baik", en: "Excellent", zh: "Excellent" },
-  "Baik": { id: "Baik", en: "Good", zh: "Good" },
-  "Cukup": { id: "Cukup", en: "Fair", zh: "Fair" },
+  "Sangat Baik": { id: "Sangat Baik", en: "Excellent", zh: "非常好" },
+  "Baik": { id: "Baik", en: "Good", zh: "好" },
+  "Cukup": { id: "Cukup", en: "Fair", zh: "一般" },
 }
 const fuelMap: Record<string, Record<string, string>> = {
-  "Bensin": { id: "Bensin", en: "Petrol", zh: "Petrol" },
-  "Solar": { id: "Solar", en: "Diesel", zh: "Diesel" },
+  "Bensin": { id: "Bensin", en: "Petrol", zh: "汽油" },
+  "Solar": { id: "Solar", en: "Diesel", zh: "柴油" },
   "Hybrid": { id: "Hybrid", en: "Hybrid", zh: "Hybrid" },
-  "Listrik": { id: "Listrik", en: "Electric", zh: "Electric" },
+  "Listrik": { id: "Listrik", en: "Electric", zh: "电动" },
 }
 const transMap: Record<string, Record<string, string>> = {
-  "Manual": { id: "Manual", en: "Manual", zh: "Manual" },
-  "Automatic": { id: "Automatic", en: "Automatic", zh: "Automatic" },
+  "Manual": { id: "Manual", en: "Manual", zh: "手动" },
+  "Automatic": { id: "Automatic", en: "Automatic", zh: "自动" },
 }
 const colorMap: Record<string, Record<string, string>> = {
-  "Putih": { id: "Putih", en: "White", zh: "White" },
-  "Hitam": { id: "Hitam", en: "Black", zh: "Black" },
-  "Silver": { id: "Silver", en: "Silver", zh: "Silver" },
-  "Merah": { id: "Merah", en: "Red", zh: "Red" },
-  "Biru": { id: "Biru", en: "Blue", zh: "Blue" },
-  "Abu-abu": { id: "Abu-abu", en: "Gray", zh: "Gray" },
-  "Coklat": { id: "Coklat", en: "Brown", zh: "Brown" },
-  "Kuning": { id: "Kuning", en: "Yellow", zh: "Yellow" },
-  "Orange": { id: "Orange", en: "Orange", zh: "Orange" },
-  "Hijau": { id: "Hijau", en: "Green", zh: "Green" },
+  "Putih": { id: "Putih", en: "White", zh: "白色" },
+  "Hitam": { id: "Hitam", en: "Black", zh: "黑色" },
+  "Silver": { id: "Silver", en: "Silver", zh: "银色" },
+  "Merah": { id: "Merah", en: "Red", zh: "红色" },
+  "Biru": { id: "Biru", en: "Blue", zh: "蓝色" },
+  "Abu-abu": { id: "Abu-abu", en: "Gray", zh: "灰色" },
+  "Coklat": { id: "Coklat", en: "Brown", zh: "棕色" },
+  "Kuning": { id: "Kuning", en: "Yellow", zh: "黄色" },
+  "Orange": { id: "Orange", en: "Orange", zh: "橙色" },
+  "Hijau": { id: "Hijau", en: "Green", zh: "绿色" },
 }
 
 const content = {
@@ -116,26 +116,26 @@ const content = {
     views: "views",
   },
   zh: {
-    login: "ZH Login", register: "ZH Register",
-    badge: "ZH Badge",
-    heroTitle: "ZH Hero",
-    heroDesc: "ZH Desc",
-    searchPlaceholder: "ZH Search...",
-    brandLabel: "ZH Brand", transmisiLabel: "ZH Trans", searchBtn: "ZH Search",
-    allBrands: "ZH All", allTrans: "ZH All",
+    login: "登录", register: "注册",
+    badge: "可信赖且实惠",
+    heroTitle: "找到你梦想中的车",
+    heroDesc: "数千辆优质二手车，价格最优惠",
+    searchPlaceholder: "搜索品牌或型号...",
+    brandLabel: "品牌", transmisiLabel: "变速箱", searchBtn: "搜索",
+    allBrands: "全部", allTrans: "ZH All",
     stats: [
-      { value: "500+", label: "ZH Cars" },
-      { value: "1000+", label: "ZH Customers" },
-      { value: "5 Years", label: "ZH Experience" },
-      { value: "100%", label: "ZH Trusted" },
+      { value: "500+", label: "可用车辆" },
+      { value: "1000+", label: "满意客户" },
+      { value: "5 Years", label: "经验" },
+      { value: "100%", label: "值得信赖" },
     ],
-    availableTitle: "ZH Available",
+    availableTitle: "可用车辆",
     found: (n: number) => `ZH ${n} cars`,
-    loading: "ZH Loading...", filterBtn: "ZH Filter",
-    notFound: "ZH Not found",
-    notFoundDesc: "ZH Change filters",
-    footer: "2026 CarMarket ZH",
-    views: "ZH views",
+    loading: "加载中...", filterBtn: "筛选",
+    notFound: "未找到车辆",
+    notFoundDesc: "请尝试更改搜索条件",
+    footer: "2026 CarMarket - 值得信赖的二手车商店",
+    views: "次查看",
   }
 }
 
