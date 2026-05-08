@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
@@ -76,7 +76,7 @@ const content = {
     confirmDelete: "Are you sure you want to delete this car?",
   },
   zh: {
-    title: "CarMarket 管理",
+    title: "CarMarket",
     viewStore: "查看商店",
     totalCars: "总车辆",
     available: "可用",
@@ -135,10 +135,9 @@ export default function AdminPage() {
       <Box sx={{ bgcolor: "#1a1a2e", py: 2, px: 3, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <DirectionsCarIcon sx={{ color: "#00b4ff", fontSize: 28 }} />
-          <Typography variant="h6" fontWeight="bold" sx={{ color: "white" }}>{t.title}</Typography>
+          <Typography variant="h6" sx={{ fontWeight: "bold", color: "white" }}>{t.title}</Typography>
         </Box>
         <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-          {/* Language Switch */}
           <Box sx={{ display: "flex", border: "1px solid #ffffff33", borderRadius: 2, overflow: "hidden", mr: 1 }}>
             {(["id", "en", "zh"] as const).map(l => (
               <Button key={l} onClick={() => { setLang(l); localStorage.setItem("lang", l) }} sx={{
@@ -168,7 +167,7 @@ export default function AdminPage() {
           ].map((stat, i) => (
             <Card key={i} sx={{ flex: "1 1 150px" }}>
               <CardContent>
-                <Typography variant="h4" fontWeight="bold" sx={{ color: stat.color }}>{stat.value}</Typography>
+                <Typography variant="h4" sx={{ fontWeight: "bold", color: stat.color }}>{stat.value}</Typography>
                 <Typography color="text.secondary">{stat.label}</Typography>
               </CardContent>
             </Card>
@@ -177,7 +176,7 @@ export default function AdminPage() {
 
         {/* Header */}
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-          <Typography variant="h5" fontWeight="bold">{t.carList}</Typography>
+          <Typography variant="h5" sx={{ fontWeight: "bold" }}>{t.carList}</Typography>
           <Button variant="contained" startIcon={<AddIcon />} onClick={() => router.push("/admin/cars/new")}
             sx={{ bgcolor: "#00b4ff", "&:hover": { bgcolor: "#0066ff" }, textTransform: "none" }}>
             {t.addCar}
@@ -209,7 +208,7 @@ export default function AdminPage() {
               ) : (
                 cars.map(car => (
                   <TableRow key={car.id} hover>
-                    <TableCell><Typography fontWeight="bold">{car.brand} {car.model}</Typography></TableCell>
+                    <TableCell><Typography sx={{ fontWeight: "bold" }}>{car.brand} {car.model}</Typography></TableCell>
                     <TableCell>{car.year}</TableCell>
                     <TableCell>{formatPrice(car.price)}</TableCell>
                     <TableCell>

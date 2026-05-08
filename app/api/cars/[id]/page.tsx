@@ -72,7 +72,7 @@ export default function CarDetail({ params }: { params: Promise<{ id: string }> 
       <Box sx={{ bgcolor: "#1a1a2e", py: 2, px: 3, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, cursor: "pointer" }} onClick={() => router.push("/")}>
           <DirectionsCarIcon sx={{ color: "#00b4ff", fontSize: 28 }} />
-          <Typography variant="h6" fontWeight="bold" sx={{ color: "white" }}>CarMarket</Typography>
+          <Typography variant="h6" sx={{ fontWeight: "bold", color: "white" }}>CarMarket</Typography>
         </Box>
       </Box>
 
@@ -111,10 +111,10 @@ export default function CarDetail({ params }: { params: Promise<{ id: string }> 
             <Card>
               <CardContent>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1 }}>
-                  <Typography variant="h5" fontWeight="bold">{car.brand} {car.model}</Typography>
+                  <Typography variant="h5" sx={{ fontWeight: "bold" }}>{car.brand} {car.model}</Typography>
                   <Chip label={car.status === "available" ? "Tersedia" : "Terjual"} color={car.status === "available" ? "success" : "error"} />
                 </Box>
-                <Typography variant="h4" color="primary" fontWeight="bold" mb={2}>
+                <Typography variant="h4" sx={{ color: "primary.main", fontWeight: "bold", mb: 2 }}>
                   {formatPrice(car.price)}
                 </Typography>
 
@@ -130,16 +130,16 @@ export default function CarDetail({ params }: { params: Promise<{ id: string }> 
                   ].map((item, i) => (
                     <Box key={i} sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                       <Box sx={{ color: "#00b4ff" }}>{item.icon}</Box>
-                      <Typography color="text.secondary">{item.label}</Typography>
-                      <Typography fontWeight="bold" ml="auto">{item.value}</Typography>
+                      <Typography sx={{ color: "text.secondary" }}>{item.label}</Typography>
+                      <Typography sx={{ fontWeight: "bold", ml: "auto" }}>{item.value}</Typography>
                     </Box>
                   ))}
                 </Box>
 
                 <Divider sx={{ mb: 2 }} />
 
-                <Typography variant="subtitle1" fontWeight="bold" mb={1}>Deskripsi</Typography>
-                <Typography color="text.secondary" mb={3}>{car.description}</Typography>
+                <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>Deskripsi</Typography>
+                <Typography sx={{ color: "text.secondary", mb: 3 }}>{car.description}</Typography>
 
                 <Button
                   variant="contained"

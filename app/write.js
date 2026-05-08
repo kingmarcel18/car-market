@@ -1,4 +1,5 @@
-"use client"
+const fs = require('fs');
+const code = `"use client"
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
@@ -42,34 +43,6 @@ type Car = {
 const BRANDS = ["Semua", "Toyota", "Honda", "Suzuki", "Mitsubishi", "Daihatsu", "Nissan", "BMW", "Mercedes"]
 const TRANSMISSIONS = ["Semua", "Manual", "Automatic"]
 
-const condMap: Record<string, Record<string, string>> = {
-  "Sangat Baik": { id: "Sangat Baik", en: "Excellent", zh: "Excellent" },
-  "Baik": { id: "Baik", en: "Good", zh: "Good" },
-  "Cukup": { id: "Cukup", en: "Fair", zh: "Fair" },
-}
-const fuelMap: Record<string, Record<string, string>> = {
-  "Bensin": { id: "Bensin", en: "Petrol", zh: "Petrol" },
-  "Solar": { id: "Solar", en: "Diesel", zh: "Diesel" },
-  "Hybrid": { id: "Hybrid", en: "Hybrid", zh: "Hybrid" },
-  "Listrik": { id: "Listrik", en: "Electric", zh: "Electric" },
-}
-const transMap: Record<string, Record<string, string>> = {
-  "Manual": { id: "Manual", en: "Manual", zh: "Manual" },
-  "Automatic": { id: "Automatic", en: "Automatic", zh: "Automatic" },
-}
-const colorMap: Record<string, Record<string, string>> = {
-  "Putih": { id: "Putih", en: "White", zh: "White" },
-  "Hitam": { id: "Hitam", en: "Black", zh: "Black" },
-  "Silver": { id: "Silver", en: "Silver", zh: "Silver" },
-  "Merah": { id: "Merah", en: "Red", zh: "Red" },
-  "Biru": { id: "Biru", en: "Blue", zh: "Blue" },
-  "Abu-abu": { id: "Abu-abu", en: "Gray", zh: "Gray" },
-  "Coklat": { id: "Coklat", en: "Brown", zh: "Brown" },
-  "Kuning": { id: "Kuning", en: "Yellow", zh: "Yellow" },
-  "Orange": { id: "Orange", en: "Orange", zh: "Orange" },
-  "Hijau": { id: "Hijau", en: "Green", zh: "Green" },
-}
-
 const content = {
   id: {
     login: "Masuk", register: "Daftar",
@@ -86,7 +59,7 @@ const content = {
       { value: "100%", label: "Terpercaya" },
     ],
     availableTitle: "Mobil Tersedia",
-    found: (n: number) => `${n} mobil ditemukan`,
+    found: (n) => n + " mobil ditemukan",
     loading: "Memuat...", filterBtn: "Filter",
     notFound: "Tidak ada mobil ditemukan",
     notFoundDesc: "Coba ubah filter pencarian",
@@ -108,7 +81,7 @@ const content = {
       { value: "100%", label: "Trusted" },
     ],
     availableTitle: "Available Cars",
-    found: (n: number) => `${n} cars found`,
+    found: (n) => n + " cars found",
     loading: "Loading...", filterBtn: "Filter",
     notFound: "No cars found",
     notFoundDesc: "Try changing your search filters",
@@ -116,27 +89,55 @@ const content = {
     views: "views",
   },
   zh: {
-    login: "ZH Login", register: "ZH Register",
-    badge: "ZH Badge",
-    heroTitle: "ZH Hero",
-    heroDesc: "ZH Desc",
-    searchPlaceholder: "ZH Search...",
-    brandLabel: "ZH Brand", transmisiLabel: "ZH Trans", searchBtn: "ZH Search",
-    allBrands: "ZH All", allTrans: "ZH All",
+    login: "\u767b\u5f55", register: "\u6ce8\u518c",
+    badge: "\u53ef\u4fe1\u8d56\u4e14\u5b9e\u60e0",
+    heroTitle: "\u627e\u5230\u4f60\u68a6\u60f3\u4e2d\u7684\u8f66",
+    heroDesc: "\u6570\u5343\u8f86\u4f18\u8d28\u4e8c\u624b\u8f66\uff0c\u4ef7\u683c\u6700\u4f18\u60e0",
+    searchPlaceholder: "\u641c\u7d22\u54c1\u724c\u6216\u578b\u53f7...",
+    brandLabel: "\u54c1\u724c", transmisiLabel: "\u53d8\u901f\u7bb1", searchBtn: "\u641c\u7d22",
+    allBrands: "\u5168\u90e8", allTrans: "\u5168\u90e8",
     stats: [
-      { value: "500+", label: "ZH Cars" },
-      { value: "1000+", label: "ZH Customers" },
-      { value: "5 Years", label: "ZH Experience" },
-      { value: "100%", label: "ZH Trusted" },
+      { value: "500+", label: "\u53ef\u7528\u8f66\u8f86" },
+      { value: "1000+", label: "\u6ee1\u610f\u5ba2\u6237" },
+      { value: "5\u5e74", label: "\u7ecf\u9a8c" },
+      { value: "100%", label: "\u503c\u5f97\u4fe1\u8d56" },
     ],
-    availableTitle: "ZH Available",
-    found: (n: number) => `ZH ${n} cars`,
-    loading: "ZH Loading...", filterBtn: "ZH Filter",
-    notFound: "ZH Not found",
-    notFoundDesc: "ZH Change filters",
-    footer: "2026 CarMarket ZH",
-    views: "ZH views",
+    availableTitle: "\u53ef\u7528\u8f66\u8f86",
+    found: (n) => "\u627e\u5230 " + n + " \u8f86\u8f66",
+    loading: "\u52a0\u8f7d\u4e2d...", filterBtn: "\u7b5b\u9009",
+    notFound: "\u672a\u627e\u5230\u8f66\u8f86",
+    notFoundDesc: "\u8bf7\u5c1d\u8bd5\u66f4\u6539\u641c\u7d22\u6761\u4ef6",
+    footer: "2026 CarMarket - \u503c\u5f97\u4fe1\u8d56\u7684\u4e8c\u624b\u8f66\u5546\u5e97",
+    views: "\u6b21\u67e5\u770b",
   }
+}
+
+const condMap = {
+  "Sangat Baik": { id: "Sangat Baik", en: "Excellent", zh: "\u975e\u5e38\u597d" },
+  "Baik": { id: "Baik", en: "Good", zh: "\u597d" },
+  "Cukup": { id: "Cukup", en: "Fair", zh: "\u4e00\u822c" },
+}
+const fuelMap = {
+  "Bensin": { id: "Bensin", en: "Petrol", zh: "\u6c7d\u6cb9" },
+  "Solar": { id: "Solar", en: "Diesel", zh: "\u67f4\u6cb9" },
+  "Hybrid": { id: "Hybrid", en: "Hybrid", zh: "\u6df7\u5408\u52a8\u529b" },
+  "Listrik": { id: "Listrik", en: "Electric", zh: "\u7535\u52a8" },
+}
+const transMap = {
+  "Manual": { id: "Manual", en: "Manual", zh: "\u624b\u52a8" },
+  "Automatic": { id: "Automatic", en: "Automatic", zh: "\u81ea\u52a8" },
+}
+const colorMap = {
+  "Putih": { id: "Putih", en: "White", zh: "\u767d\u8272" },
+  "Hitam": { id: "Hitam", en: "Black", zh: "\u9ed1\u8272" },
+  "Silver": { id: "Silver", en: "Silver", zh: "\u94f6\u8272" },
+  "Merah": { id: "Merah", en: "Red", zh: "\u7ea2\u8272" },
+  "Biru": { id: "Biru", en: "Blue", zh: "\u84dd\u8272" },
+  "Abu-abu": { id: "Abu-abu", en: "Gray", zh: "\u7070\u8272" },
+  "Coklat": { id: "Coklat", en: "Brown", zh: "\u68d5\u8272" },
+  "Kuning": { id: "Kuning", en: "Yellow", zh: "\u9ec4\u8272" },
+  "Orange": { id: "Orange", en: "Orange", zh: "\u6a59\u8272" },
+  "Hijau": { id: "Hijau", en: "Green", zh: "\u7eff\u8272" },
 }
 
 export default function Home() {
@@ -159,10 +160,10 @@ export default function Home() {
   async function fetchCars() {
     setLoading(true)
     const params = new URLSearchParams()
-    if (brand !== "Semua" && brand !== "All") params.append("brand", brand)
-    if (transmission !== "Semua" && transmission !== "All") params.append("transmission", transmission)
+    if (brand !== "Semua" && brand !== "All" && brand !== "\u5168\u90e8") params.append("brand", brand)
+    if (transmission !== "Semua" && transmission !== "All" && transmission !== "\u5168\u90e8") params.append("transmission", transmission)
     if (search) params.append("search", search)
-    const res = await fetch(`/api/cars?${params}`)
+    const res = await fetch("/api/cars?" + params)
     const data = await res.json()
     setCars(data)
     setLoading(false)
@@ -201,7 +202,7 @@ export default function Home() {
         <Typography variant="h3" sx={{ fontWeight: "bold", color: "white", mb: 1, fontSize: { xs: 28, md: 42 } }}>{t.heroTitle}</Typography>
         <Typography sx={{ color: "#94a3b8", mb: 5, fontSize: 16 }}>{t.heroDesc}</Typography>
         <Box sx={{ bgcolor: "white", borderRadius: 3, p: 2, maxWidth: 800, mx: "auto", display: "flex", gap: 2, flexWrap: "wrap", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}>
-          <TextField placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} onKeyDown={e => e.key === "Enter" && fetchCars()} sx={{ flex: "1 1 200px" }} size="small" slotProps={{ input: { startAdornment: <InputAdornment position="start"><SearchIcon sx={{ color: "#94a3b8" }} /></InputAdornment> } }} />
+          <TextField placeholder={t.searchPlaceholder} value={search} onChange={e => setSearch(e.target.value)} onKeyDown={e => e.key === "Enter" && fetchCars()} sx={{ flex: "1 1 200px" }} size="small" InputProps={{ startAdornment: <InputAdornment position="start"><SearchIcon sx={{ color: "#94a3b8" }} /></InputAdornment> }} />
           <FormControl size="small" sx={{ flex: "1 1 130px" }}>
             <InputLabel>{t.brandLabel}</InputLabel>
             <Select value={brand} onChange={e => setBrand(e.target.value)} label={t.brandLabel}>
@@ -251,9 +252,9 @@ export default function Home() {
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
           {cars.map(car => (
             <Box key={car.id} sx={{ flex: "1 1 280px", maxWidth: 360 }}>
-              <Card sx={{ cursor: "pointer", borderRadius: 3, border: "1px solid #e2e8f0", boxShadow: "none", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 12px 40px rgba(0,0,0,0.1)", borderColor: "#2563eb" }, transition: "all 0.25s" }} onClick={() => router.push(`/cars/${car.id}`)}>
+              <Card sx={{ cursor: "pointer", borderRadius: 3, border: "1px solid #e2e8f0", boxShadow: "none", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 12px 40px rgba(0,0,0,0.1)", borderColor: "#2563eb" }, transition: "all 0.25s" }} onClick={() => router.push("/cars/" + car.id)}>
                 <Box sx={{ position: "relative" }}>
-                  <CardMedia component="img" height="200" image={car.images.split(",")[0] || "https://via.placeholder.com/400x200?text=No+Image"} alt={`${car.brand} ${car.model}`} sx={{ objectFit: "cover" }} />
+                  <CardMedia component="img" height="200" image={car.images.split(",")[0] || "https://via.placeholder.com/400x200?text=No+Image"} alt={car.brand + " " + car.model} sx={{ objectFit: "cover" }} />
                   <Chip label={car.year} size="small" sx={{ position: "absolute", top: 12, right: 12, bgcolor: "#2563eb", color: "white", fontWeight: "bold" }} />
                   <Chip label={(condMap[car.condition] || {})[lang] || car.condition} size="small" sx={{ position: "absolute", top: 12, left: 12, bgcolor: car.condition === "Sangat Baik" ? "#dcfce7" : "#fef9c3", color: car.condition === "Sangat Baik" ? "#16a34a" : "#ca8a04", fontWeight: "bold" }} />
                 </Box>
@@ -297,3 +298,7 @@ export default function Home() {
     </Box>
   )
 }
+`;
+
+fs.writeFileSync('app/page.tsx', code, 'utf8');
+console.log('Done!');

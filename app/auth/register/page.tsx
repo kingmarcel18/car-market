@@ -23,7 +23,6 @@ const content = {
     password: "Password",
     registerBtn: "Daftar",
     loading: "Loading...",
-    errorExists: "Email sudah terdaftar!",
     errorGeneral: "Terjadi kesalahan!",
     hasAccount: "Sudah punya akun?",
     login: "Masuk",
@@ -38,7 +37,6 @@ const content = {
     password: "Password",
     registerBtn: "Register",
     loading: "Loading...",
-    errorExists: "Email already registered!",
     errorGeneral: "Something went wrong!",
     hasAccount: "Already have an account?",
     login: "Login",
@@ -53,7 +51,6 @@ const content = {
     password: "密码",
     registerBtn: "注册",
     loading: "加载中...",
-    errorExists: "邮箱已注册！",
     errorGeneral: "发生错误！",
     hasAccount: "已有账号？",
     login: "登录",
@@ -114,10 +111,10 @@ export default function RegisterPage() {
 
       <Card sx={{ width: 400, p: 2, borderRadius: 3, boxShadow: "0 4px 20px rgba(0,0,0,0.08)", border: "1px solid #e2e8f0" }}>
         <CardContent>
-          <Typography variant="h5" fontWeight="bold" mb={1} textAlign="center" color="#1e293b">
+          <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1, textAlign: "center", color: "#1e293b" }}>
             {t.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary" textAlign="center" mb={3}>
+          <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "center", mb: 3 }}>
             {t.subtitle}
           </Typography>
 
@@ -139,41 +136,22 @@ export default function RegisterPage() {
           </Button>
 
           <Divider sx={{ mb: 3 }}>
-            <Typography variant="caption" color="text.secondary">{t.orEmail}</Typography>
+            <Typography variant="caption" sx={{ color: "text.secondary" }}>{t.orEmail}</Typography>
           </Divider>
 
           {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <TextField label={t.name} fullWidth size="small" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
+            <TextField label={t.email} type="email" fullWidth size="small" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
             <TextField
-              label={t.name}
-              fullWidth
-              size="small"
-              value={form.name}
-              onChange={e => setForm({ ...form, name: e.target.value })}
-            />
-            <TextField
-              label={t.email}
-              type="email"
-              fullWidth
-              size="small"
-              value={form.email}
-              onChange={e => setForm({ ...form, email: e.target.value })}
-            />
-            <TextField
-              label={t.password}
-              type="password"
-              fullWidth
-              size="small"
+              label={t.password} type="password" fullWidth size="small"
               value={form.password}
               onChange={e => setForm({ ...form, password: e.target.value })}
               onKeyDown={e => e.key === "Enter" && handleRegister()}
             />
             <Button
-              variant="contained"
-              fullWidth
-              onClick={handleRegister}
-              disabled={loading}
+              variant="contained" fullWidth onClick={handleRegister} disabled={loading}
               sx={{ py: 1.2, borderRadius: 2, bgcolor: "#2563eb", "&:hover": { bgcolor: "#1d4ed8" }, textTransform: "none", fontSize: 15 }}
             >
               {loading ? t.loading : t.registerBtn}

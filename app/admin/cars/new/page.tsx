@@ -70,13 +70,13 @@ export default function NewCarPage() {
       {/* Navbar */}
       <Box sx={{ bgcolor: "#1a1a2e", py: 2, px: 3, display: "flex", alignItems: "center", gap: 1 }}>
         <DirectionsCarIcon sx={{ color: "#00b4ff", fontSize: 28 }} />
-        <Typography variant="h6" fontWeight="bold" sx={{ color: "white" }}>CarMarket Admin</Typography>
+        <Typography variant="h6" sx={{ color: "white", fontWeight: "bold" }}>CarMarket Admin</Typography>
       </Box>
 
       <Container maxWidth="md" sx={{ py: 4 }}>
         <Button startIcon={<ArrowBackIcon />} onClick={() => router.back()} sx={{ mb: 3 }}>Kembali</Button>
 
-        <Typography variant="h5" fontWeight="bold" mb={3}>Tambah Mobil Baru</Typography>
+        <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3 }}>Tambah Mobil Baru</Typography>
 
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
         {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
@@ -86,7 +86,7 @@ export default function NewCarPage() {
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
 
               {/* Info Dasar */}
-              <Typography variant="subtitle1" fontWeight="bold" color="primary">Informasi Dasar</Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold", color: "#2563eb" }}>Informasi Dasar</Typography>
               <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
                 <TextField label="Merk *" value={form.brand} onChange={e => setForm({ ...form, brand: e.target.value })} sx={{ flex: "1 1 200px" }} />
                 <TextField label="Model *" value={form.model} onChange={e => setForm({ ...form, model: e.target.value })} sx={{ flex: "1 1 200px" }} />
@@ -101,7 +101,7 @@ export default function NewCarPage() {
               </Box>
 
               {/* Spesifikasi */}
-              <Typography variant="subtitle1" fontWeight="bold" color="primary">Spesifikasi</Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold", color: "#2563eb" }}>Spesifikasi</Typography>
               <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
                 <FormControl sx={{ flex: "1 1 150px" }}>
                   <InputLabel>Transmisi</InputLabel>
@@ -137,7 +137,7 @@ export default function NewCarPage() {
               </Box>
 
               {/* Kontak & Foto */}
-              <Typography variant="subtitle1" fontWeight="bold" color="primary">Kontak & Foto</Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold", color: "#2563eb" }}>Kontak & Foto</Typography>
               <TextField
                 label="No WhatsApp * (contoh: 6281234567890)"
                 value={form.whatsapp}

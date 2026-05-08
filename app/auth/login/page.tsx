@@ -107,10 +107,10 @@ export default function LoginPage() {
 
       <Card sx={{ width: 400, p: 2, borderRadius: 3, boxShadow: "0 4px 20px rgba(0,0,0,0.08)", border: "1px solid #e2e8f0" }}>
         <CardContent>
-          <Typography variant="h5" fontWeight="bold" mb={1} textAlign="center" color="#1e293b">
+          <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1, textAlign: "center", color: "#1e293b" }}>
             {t.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary" textAlign="center" mb={3}>
+          <Typography variant="body2" sx={{ color: "text.secondary", textAlign: "center", mb: 3 }}>
             {t.subtitle}
           </Typography>
 
@@ -132,7 +132,7 @@ export default function LoginPage() {
           </Button>
 
           <Divider sx={{ mb: 3 }}>
-            <Typography variant="caption" color="text.secondary">{t.orEmail}</Typography>
+            <Typography variant="caption" sx={{ color: "text.secondary" }}>{t.orEmail}</Typography>
           </Divider>
 
           {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
