@@ -224,7 +224,7 @@ export default function Home() {
             {t.stats.map((stat, i) => (
               <Box key={i} sx={{ textAlign: "center" }}>
                 <Typography variant="h5" sx={{ fontWeight: "bold" }} color="primary">{stat.value}</Typography>
-                <Typography variant="caption" color="text.secondary">{stat.label}</Typography>
+                <Typography variant="caption" sx={{ color: "#475569" }}>{stat.label}</Typography>
               </Box>
             ))}
           </Box>
